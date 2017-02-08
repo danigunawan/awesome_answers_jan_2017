@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AwesomeAnswers</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <a href="/">Home</a>
+    |
+    <!-- <a href="<%= contact_path %>">Contact Us</a> -->
+    <%= link_to('Contact Us', contact_path) %>
+    <hr>
+    <%= yield %>
+  </body>
+</html>
