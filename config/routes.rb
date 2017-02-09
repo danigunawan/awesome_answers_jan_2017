@@ -15,4 +15,16 @@ Rails.application.routes.draw do
   post '/contact_submit' => 'welcome#contact_submit'
 
   get '/about'   => 'welcome#about_us', as: :aboutus
+
+  # resources :questions, only: [:create, :update]
+  # resources :questions, except: [:index]
+  resources :questions
+  # get    '/questions/new'      => 'questions#new',    as: :new_question
+  # post   '/questions'          => 'questions#create', as: :questions
+  # get    '/questions/:id'      => 'questions#show',   as: :question
+  # get    '/questions'          => 'questions#index'
+  # get    '/questions/:id/edit' => 'questions#edit',   as: :edit_question
+  # patch  '/questions/:id'      => 'questions#update'
+  # delete '/questions/:id'      => 'questions#destroy'
+
 end
