@@ -1,0 +1,27 @@
+<%# form_for is a Rails helper (built-in) generate a form to create or updated_at
+    a record in the database through a controller. `form_for` expects to be
+    given an ActiveRecord object as its first argument. If the object is not
+    persisted then the form will use POST request and the URL will be the create
+    action path which is in this case `questions_path`.
+    We also have access to the `f` object which eases creating fields for the
+    form. The field will be automatically pre-populated with any data set in
+    the object (such as title / body). It will also automatically set special
+    `name` attributes to the generated fields. %>
+    <%# `form_for` will look at the first arguemnt (in this @question) if @question
+        is persisted which is the case here as we're editing an existing question,
+        `form_for` will use  question_path(@question) for its action and it will
+        use `PATCH` for its request by including a hidden field with name `_method`
+        and value `PATCH` to mimick a PATCH request %>
+
+<p><%= @question.errors.full_messages.join(', ') %></p>
+<%= form_for @question do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit %>
+<% end %>
