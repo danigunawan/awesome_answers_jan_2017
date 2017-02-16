@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AwesomeAnswers</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <span>Admin Panel: </span>
+    <a href="/">Home</a>
+    |
+    <%= link_to 'All Questions', questions_path %>
+    |
+    <!-- <a href="<%= contact_path %>">Contact Us</a> -->
+    <%= link_to('Contact Us', contact_path) %>
+    <% if user_signed_in? %>
+      <span>Hello <%= current_user.full_name %>, </span>
+      <%= link_to 'Sign Out', sessions_path, method: :delete %>
+    <% else %>
+      <%= link_to 'Sign Up', new_user_path %>
+      <%= link_to 'Sign In', new_session_path %>
+    <% end %>
+    <hr>
+    <%= notice || alert %>
+    <%= yield %>
+  </body>
+</html>
