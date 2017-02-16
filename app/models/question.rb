@@ -1,4 +1,5 @@
 class Question < ApplicationRecord
+  attr_accessor :abc
 
   # this sets up one-to-many association between the question and the answer
   # in this case a question has many answers (note that to set a one-to-many
@@ -16,6 +17,7 @@ class Question < ApplicationRecord
   # nullify: which will update all the `question_id` fields on the associated
   #          answers to be come `NULL` before deleting the question
   has_many :answers, lambda { order(created_at: :desc) }, dependent: :destroy
+  belongs_to :user
 
   # validates :title, presence: { message: 'must be given!' }
   validates(:title, { presence: { message: 'must be given!' },

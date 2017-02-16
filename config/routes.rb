@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   # you map a HTTP verb / URL combo to a controller + action (method)
 
   # get({ '/' => 'welcome#index' })
-  get '/' => 'welcome#index'
+  # get '/' => 'welcome#index', as: :root
+  root 'welcome#index'
+
   # the above route maps any `GET` request with `/` URL to the index action
   # within the WelcomeController (action is a method defined within the
   # controller class)
@@ -33,6 +35,11 @@ Rails.application.routes.draw do
     # routes. This will make all the `answers` routes prefixed with
     # `/questions/:question_id`
     resources :answers, only: [:create, :destroy]
+  end
+
+  resources :users, only: [:new, :create]
+  resources :sessions, only: [:new, :create] do
+    delete :destroy, on: :collection
   end
 
   # post '/questions/search' => 'questions#search'
