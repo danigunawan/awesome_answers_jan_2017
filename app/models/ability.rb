@@ -28,6 +28,16 @@ class Ability
       q.user == user
     end
 
+    # cannot only defines the ability for the cannot?() method
+    cannot :like, Question do |q|
+      user == q.user
+    end
+
+    # can defines the ability for the can?() method
+    can :like, Question do |q|
+      user != q.user
+    end
+
 
     # Define abilities for the passed in user here. For example:
     #

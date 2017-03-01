@@ -16,6 +16,16 @@ class Question < ApplicationRecord
   #          question
   # nullify: which will update all the `question_id` fields on the associated
   #          answers to be come `NULL` before deleting the question
+
+
+  has_many :likes, dependent: :destroy
+  # 👇 will create an instance method named likers that will get all users that
+  # liked the question
+  # through - this argument defines which model is used for the join (i.e. the table that
+  # has a reference to the user and the question)
+  # source - this argument defines what is the target reference from the like model
+  has_many :likers, through: :likes, source: :user
+
   has_many :answers, lambda { order(created_at: :desc) }, dependent: :destroy
   belongs_to :user
 
@@ -44,6 +54,16 @@ class Question < ApplicationRecord
   # This method will be callable on the class itself (i.e. Question.search("thing"))
   def self.search(query)
     where("title ILIKE ? or body ILIKE ?", "%#{query}%", "%#{query}%")
+  end
+
+  def liked_by?(user)
+    # exists? returns true if the query in the argument returns something
+    # it returns true if there is a like with the user reference `user`
+    likes.exists?(user: user)
+  end
+
+  def like_for(user)
+    likes.find_by(user: user)
   end
 
   private

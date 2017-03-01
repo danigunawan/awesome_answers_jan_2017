@@ -44,9 +44,13 @@ Rails.application.routes.draw do
     # routes. This will make all the `answers` routes prefixed with
     # `/questions/:question_id`
     resources :answers, only: [:create, :destroy]
+    resources :likes, only: [:create, :destroy]
   end
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create] do
+    resources :likes, only: [:index]
+  end
+
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection
   end
