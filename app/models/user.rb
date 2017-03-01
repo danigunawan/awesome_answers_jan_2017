@@ -18,6 +18,9 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :liked_questions, through: :likes, source: :question
 
+  has_many :votes, dependent: :destroy
+  has_many :voted_questions, through: :votes, source: :question
+
   before_validation :downcase_email
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i

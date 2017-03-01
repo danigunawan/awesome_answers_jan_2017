@@ -33,6 +33,7 @@ class QuestionsController < ApplicationController
 
   def show
     @answer = Answer.new
+    @vote = @question.vote_for(current_user)
   end
 
   def index

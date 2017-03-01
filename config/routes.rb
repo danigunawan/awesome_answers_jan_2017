@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     # `/questions/:question_id`
     resources :answers, only: [:create, :destroy]
     resources :likes, only: [:create, :destroy]
+    resources :votes, only: [:create, :update, :destroy]
   end
 
   resources :users, only: [:new, :create] do

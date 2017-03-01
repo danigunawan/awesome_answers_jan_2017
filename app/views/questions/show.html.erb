@@ -16,6 +16,21 @@ by the first argument. Finally, it will return them joined together
 %>
 (<%= pluralize @question.likes.count, 'like' %>)
 
+<% if @vote.nil? %>
+  <%= link_to 'Vote Up', question_votes_path(@question, { is_up: true }),
+                         method: :post %>
+
+  <%= link_to 'Vote Down', question_votes_path(@question, { is_up: false }),
+                         method: :post %>
+<% elsif @vote.is_up? %>
+  <%= link_to 'Un-do Vote Up', vote_path(@vote), method: :delete %>
+  <%= link_to 'Vote Down', vote_path(@vote, { is_up: false }), method: :patch %>
+<% else %>
+  <%= link_to 'Vote Up', vote_path(@vote, { is_up: true }), method: :patch %>
+  <%= link_to 'Un-do Vote Down', vote_path(@vote), method: :delete %>
+<% end %>
+
+(<%= @question.votes_total %>)
 
 <% if can?(:manage, @question) %>
   <%= link_to 'Edit', edit_question_path(@question) %>

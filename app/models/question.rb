@@ -26,6 +26,9 @@ class Question < ApplicationRecord
   # source - this argument defines what is the target reference from the like model
   has_many :likers, through: :likes, source: :user
 
+  has_many :votes, dependent: :destroy
+  has_many :voters, through: :votes, source: :user
+
   has_many :answers, lambda { order(created_at: :desc) }, dependent: :destroy
   belongs_to :user
 
@@ -64,6 +67,15 @@ class Question < ApplicationRecord
 
   def like_for(user)
     likes.find_by(user: user)
+  end
+
+  def vote_for(user)
+    # votes.find_by_user_id user.id
+    votes.find_by(user: user)
+  end
+
+  def votes_total
+    votes.up.count - votes.down.count
   end
 
   private
