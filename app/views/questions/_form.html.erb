@@ -25,7 +25,9 @@
   </div>
   <div>
     <%= f.label :tag_ids %>
-    <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name do |b| %>
+    <%= f.collection_select :tag_ids, Tag.all, :id, :name,
+                            {},
+                            { multiple: true, class: 'chosen-select' } do |b| %>
       <div class='tag-wrapper'>
         <%= b.check_box %>
         <%= b.text %>

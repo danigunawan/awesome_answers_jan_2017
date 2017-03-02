@@ -45,6 +45,10 @@ GEM
     byebug (9.0.6)
     cancancan (1.16.0)
     choice (0.2.0)
+    chosen-rails (1.5.2)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.2.x)
@@ -173,6 +177,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
   cancancan
+  chosen-rails
   coffee-rails (~> 4.2)
   cowsay (~> 0.3.0)
   faker

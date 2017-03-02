@@ -24,6 +24,8 @@ gem 'coffee-rails', '~> 4.2'
 
 gem 'cowsay', '~> 0.3.0'
 
+gem 'chosen-rails'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
