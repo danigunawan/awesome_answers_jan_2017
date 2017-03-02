@@ -26,3 +26,7 @@ users = User.all
     user: users.sample
   )
 end
+
+10.times do
+  Tag.create name: Faker::Hipster.word
+end
