@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   # you map a HTTP verb / URL combo to a controller + action (method)
 
+  match '/delayed_job' => DelayedJobWeb, anchor: false, via: [:get, :post]
+
   # get({ '/' => 'welcome#index' })
   # get '/' => 'welcome#index', as: :root
   root 'welcome#index'

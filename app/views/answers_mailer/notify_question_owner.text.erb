@@ -1,0 +1,11 @@
+Hello <%= @owner.full_name %>,
+
+You got a new answer to your question:
+
+Question title: <%= @question.title %>
+
+The Answer: <%= @answer.body %>
+
+<%= question_url(@question) %>
+
+Awesome Answers Team
