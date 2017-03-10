@@ -34,6 +34,19 @@ class QuestionsController < ApplicationController
   def show
     @answer = Answer.new
     @vote = @question.vote_for(current_user)
+    # respond_to enables us to send different responses depending on the format
+    # of the request
+    respond_to do |format|
+      # `html` is the default format. Render will just render `show.html.erb`
+      format.html { render }
+      # this will render `show.json.erb`
+      # format.json { render }
+
+      # with every ActiveRecord object we have a `to_json` method that returns
+      # a JSON object with attributes of every single attribute in the
+      # ActiveRecord object
+      format.json { render json: @question.to_json }
+    end
   end
 
   def index

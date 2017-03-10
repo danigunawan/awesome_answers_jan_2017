@@ -33,7 +33,7 @@ class Question < ApplicationRecord
   has_many :tags, through: :taggings
 
   has_many :answers, lambda { order(created_at: :desc) }, dependent: :destroy
-  belongs_to :user
+  belongs_to :user, optional: true
 
   # validates :title, presence: { message: 'must be given!' }
   validates(:title, { presence: { message: 'must be given!' },

@@ -1,4 +1,8 @@
 class ApplicationController < ActionController::Base
+  # this will throw an exception every time you make a non-GET request that
+  # doesn't include authenticity_token. When you use `form_for` or `form_tag`
+  # in Rails, it auto generates a hidden field that contains the
+  # authenticity_token.
   protect_from_forgery with: :exception
 
   def authenticate_user!

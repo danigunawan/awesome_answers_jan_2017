@@ -7,6 +7,12 @@ Rails.application.routes.draw do
   # get '/' => 'welcome#index', as: :root
   root 'welcome#index'
 
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :questions, only: [:show, :index, :create]
+    end
+  end
+
   # resources :dashboard, only: [:index], controller: 'admin/dashboard'
 
   # this will make the url structure follow the folder structure of the

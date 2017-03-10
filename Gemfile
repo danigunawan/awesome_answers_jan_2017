@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'faker'
 gem 'cancancan'
+gem 'active_model_serializers'
 
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'

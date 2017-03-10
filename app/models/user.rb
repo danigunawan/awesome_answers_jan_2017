@@ -23,6 +23,8 @@ class User < ApplicationRecord
 
   before_validation :downcase_email
 
+  before_create :generate_api_key
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true,
                     uniqueness: true,
@@ -33,6 +35,13 @@ class User < ApplicationRecord
   end
 
   private
+
+  def generate_api_key
+    loop do
+      self.api_key = SecureRandom.hex
+      break unless User.exists?(api_key: api_key)
+    end
+  end
 
   def downcase_email
     self.email&.downcase!
