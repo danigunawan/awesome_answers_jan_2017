@@ -1,8 +1,15 @@
 class Api::V1::QuestionsController < Api::BaseController
+  PER_PAGE = 10
 
   def index
-    @questions = Question.order(created_at: :desc)
+    current_page   = params.fetch(:page, 0).to_i
+    offset         = PER_PAGE * current_page
 
+    @questions = Question.order(created_at: :desc)
+                         .limit(PER_PAGE)
+                         .offset(offset)
+
+    @more_questions = (Question.count - ((current_page + 1) * PER_PAGE)) > 0
     # This will use the built-in `to_json` method that comes with Rails which
     # sends all the attributes without associations
     # render json: @questions.to_json

@@ -1,5 +1,7 @@
+json.more_questions @more_questions
+
 # this generates a JSON array as the main element
-json.array! @questions do |question|
+json.questions @questions do |question|
   json.id question.id
 
   # json.title will generate a key called `title` in an object within the main
