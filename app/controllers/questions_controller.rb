@@ -79,7 +79,8 @@ class QuestionsController < ApplicationController
     # this feature is called strong parameters (introduced in Rails 4+)
     # { tag_ids: [] } will tell Rails to accept and array of value for `tag_ids`
     # instead of a single value
-    params.require(:question).permit([:title, :body, { tag_ids: [] }])
+    params.require(:question).permit([:title, :body, :image, { tag_ids: [] }])
+
   end
 
   def find_question

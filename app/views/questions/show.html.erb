@@ -9,6 +9,8 @@
   <% end %>
 <% end %>
 
+<%= image_tag @question.image.url if @question.image.present? %>
+
 <%# pluralize is a helper method that takes a number as first argument and a word
 as a second argument. It will pluralize the word based on the quantity represented
 by the first argument. Finally, it will return them joined together

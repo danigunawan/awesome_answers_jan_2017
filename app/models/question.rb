@@ -3,6 +3,8 @@ class Question < ApplicationRecord
 
   extend FriendlyId
 
+  mount_uploader :image, ImageUploader
+
   # the :history option will keep a history for the slugs in a the
   # friendly_id_slugs table which support slugs that were used before for the
   # model

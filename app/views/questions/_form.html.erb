@@ -19,5 +19,9 @@
   <%= f.input :title %>
   <%= f.input :body %>
   <%= f.association :tags, input_html: { class: 'chosen-select form-control' } %>
+  <%# simple_form integrates nicely with CarrierWave so when using f.input for
+      a field that is used to upload a file then simple_form will use a
+      file field for it and it will set the correct enctype for the form %>
+  <%= f.input :image %>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>
