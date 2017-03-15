@@ -2,6 +2,13 @@ class Question < ApplicationRecord
   attr_accessor :abc
 
   extend FriendlyId
+
+  # the :history option will keep a history for the slugs in a the
+  # friendly_id_slugs table which support slugs that were used before for the
+  # model
+  # the :finders option will make so that Question.find will work if you give it
+  # a slug instead of an id (otherwise, you would have to use
+  # Question.friendly.find)
   friendly_id :title, use: [:slugged, :finders, :history]
 
   # this sets up one-to-many association between the question and the answer

@@ -57,6 +57,9 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    # by default friendly_id won't update the slug of question, so one way to
+    # force friendly_id to update the slug is by setting the slug to `nil`
+    # before updating the question
     @question.slug = nil
     if @question.update question_params
       redirect_to question_path(@question), notice: 'Question updated!'

@@ -49,10 +49,9 @@ by the first argument. Finally, it will return them joined together
     If it's not persisted, the URL generated will be:
      question_answers_path(@question). If it's persisted then the URL will be:
      question_answer_path(@question, @answer) %>
-<%= @answer.errors.full_messages.join(', ') %>
-<%= form_for [@question, @answer] do |f| %>
-  <%= f.text_area :body %>
-  <%= f.submit %>
+<%= simple_form_for [@question, @answer] do |f| %>
+  <%= f.input :body, label: false, hint: 'at least 5 characters' %>
+  <%= f.submit class: 'btn btn-primary' %>
 <% end %>
 
 <hr>
