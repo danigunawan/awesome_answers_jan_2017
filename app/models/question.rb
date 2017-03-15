@@ -1,6 +1,9 @@
 class Question < ApplicationRecord
   attr_accessor :abc
 
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :finders, :history]
+
   # this sets up one-to-many association between the question and the answer
   # in this case a question has many answers (note that to set a one-to-many
   # association you will have to pluralize `answer` - Rails convention)
@@ -80,6 +83,10 @@ class Question < ApplicationRecord
   def votes_total
     votes.up.count - votes.down.count
   end
+
+  # def to_param
+  #   "#{id}-#{title}".parameterize
+  # end
 
   private
 
