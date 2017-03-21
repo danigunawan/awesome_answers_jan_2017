@@ -43,6 +43,10 @@ gem 'delayed_job_web'
 gem 'sinatra', '2.0.0.beta2'
 gem 'simple_form'
 
+gem 'inherited_resources', '~> 1.7'
+gem 'activeadmin', '1.0.0.pre5'
+gem 'devise'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

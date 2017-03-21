@@ -30,3 +30,4 @@ end
 10.times do
   Tag.create name: Faker::Hipster.word
 end
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
