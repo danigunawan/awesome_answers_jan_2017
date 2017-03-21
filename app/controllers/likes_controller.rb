@@ -10,7 +10,13 @@ class LikesController < ApplicationController
 
   def create
     if cannot? :like, @question
-      redirect_to question_path(@question), alert: 'Liking your own Question isn\'t allowed'
+      respond_to do |format|
+        format.html do
+          redirect_to question_path(@question),
+                      alert: 'Liking your own Question isn\'t allowed'
+        end
+        format.js { render js: 'alert("You can\'t like your own question");' }
+      end
       # redirect_to and render does not prevent the rest of method from executing
       # calling redirect_to and/or render twice or more in an action will cause
       # an error
@@ -19,12 +25,18 @@ class LikesController < ApplicationController
       return
     end
 
-    like = Like.new(user: current_user, question: @question)
+    @like = Like.new(user: current_user, question: @question)
 
-    if like.save
-      redirect_to question_path(@question), notice: 'Question liked! 💙'
+    if @like.save
+      respond_to do |format|
+        format.html { redirect_to question_path(@question), notice: 'Question liked! 💙' }
+        format.js   { render }
+      end
     else
-      redirect_to question_path(@question), alert: 'Couldn\'t like question! 💔'
+      respond_to do |format|
+        format.html { redirect_to question_path(@question), alert: 'Couldn\'t like question! 💔' }
+        format.js   { render }
+      end
     end
   end
 
@@ -32,18 +44,33 @@ class LikesController < ApplicationController
   # successful
 
   def destroy
-    if cannot? :like, @like.question
-      redirect_to question_path(@like.question), alert: 'Un-liking your own Question isn\'t allowed'
+    @question = @like.question
+    if cannot? :like, @question
+      respond_to do |format|
+        format.html do
+          redirect_to question_path(@question),
+                      alert: 'Un-liking your own Question isn\'t allowed'
+        end
+        format.js { render js: 'can\'t unlike' }
+      end
       return
     end
 
-    redirect_to(
-      question_path(@like.question),
-      @like.destroy ? {notice: 'Question Un-liked! 💔'} : {alert: @like.errors.full_messages.join(', ')}
-    )
+    @destroy_outcome = @like.destroy
+
+    respond_to do |format|
+      format.html do
+        redirect_to(
+        question_path(@question),
+          @destroy_outcome ? {notice: 'Question Un-liked! 💔'} : {alert: @like.errors.full_messages.join(', ')}
+        )
+      end
+      format.js { render }
+    end
   end
 
   private
+
   def find_like
     @like ||= Like.find(params[:id])
   end
